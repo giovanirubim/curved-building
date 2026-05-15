@@ -1,0 +1,9 @@
+export const mainWidth = 30;
+export const radius1 = 51.5;
+export const radius2 = 46.5;
+export const angle1 = 80 * (Math.PI / 180);
+export const angle2 = 57 * (Math.PI / 180);
+export const wallWidth = 0.15;
+export const leftGap = 1.2;
+export const roomWidth = 6;
+export const rightGap = 1.2;
