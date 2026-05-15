@@ -1,23 +1,22 @@
-import { applyOffset, applyZoom, setViewport } from './projection.js';
 import { canvas, ctx, tracePoints } from './canvas.js';
 import { generateBuildingElements } from './building-elements.js';
+import { drawElements } from './elements.js';
+import { getValues } from './building-math.js';
+
+import {
+	applyOffset,
+	applyZoom,
+	centralize,
+	setViewport,
+} from './projection.js';
 
 const paths = [];
-
-function drawPaths() {
-	ctx.strokeStyle = '#fff';
-	ctx.beginPath();
-	for (const path of paths) {
-		tracePoints(path);
-	}
-	ctx.stroke();
-}
 
 const start = Date.now();
 function render() {
 	ctx.fillStyle = '#246';
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
-	drawPaths();
+	drawElements();
 }
 
 function adjustScreen() {
@@ -63,5 +62,6 @@ canvas.addEventListener('mousemove', (e) => {
 });
 
 adjustScreen();
-paths.push(...generateBuildingElements());
+generateBuildingElements();
+centralize(getValues().corners);
 render();

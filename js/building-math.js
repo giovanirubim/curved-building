@@ -1,4 +1,10 @@
-import { angle1, angle2, mainWidth, radius1, radius2 } from './building-vars.js';
+import {
+	angle1,
+	angle2,
+	mainWidth,
+	radius1,
+	radius2,
+} from './building-vars.js';
 import { sum, sub, len, normal, scale, neg } from './vector-math.js';
 
 const halfWidth = mainWidth * 0.5;
@@ -11,16 +17,6 @@ const x3 = x2 - Math.cos(ang) * (radius2 + mainWidth * 2);
 const y3 = y2 + Math.sin(ang) * (radius2 + mainWidth * 2);
 const circle1 = [0, y1];
 const circle2 = [x2, y2];
-const leftLen = offsetToFullLen(0);
-const rightLen = offsetToFullLen(mainWidth);
-
-export function getLeftLen() {
-	return leftLen;
-}
-
-export function getRightLen() {
-	return rightLen;
-}
 
 export function applyRuler({ start, dir }, offset) {
 	return sum(start, scale(dir, offset));
@@ -134,4 +130,22 @@ export function transferLen(offset, len, newOffset) {
 	const ruler = offsetAndLenToRuler(offset, len);
 	const point = applyRuler(ruler, newOffset);
 	return solvePoint(point).len;
+}
+
+const leftLen = offsetToFullLen(0);
+const rightLen = offsetToFullLen(mainWidth);
+
+export function getValues() {
+	return {
+		circle1,
+		radius1,
+		circle2,
+		radius2,
+		leftLen,
+		rightLen,
+		corners: [
+			offsetAndLenToPoint(mainWidth, 0),
+			offsetAndLenToPoint(0, leftLen),
+		],
+	};
 }

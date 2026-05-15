@@ -49,3 +49,18 @@ export function setViewport(viewport) {
 	halfWidth = width / 2;
 	halfHeight = height / 2;
 }
+
+export function centralize(corners) {
+	const [[ax, ay], [bx, by]] = corners;
+	const xMin = Math.min(ax, bx);
+	const xMax = Math.max(ax, bx);
+	const yMin = Math.min(ay, by);
+	const yMax = Math.max(ay, by);
+	centerX = (ax + bx) / 2;
+	centerY = (ay + by) / 2;
+	const targetWidth = xMax - xMin;
+	const targetHeight = yMax - yMin;
+	const scale1 = width / targetWidth;
+	const scale2 = height / targetHeight;
+	pxPerMeter = Math.min(scale1, scale2) * 0.9;
+}

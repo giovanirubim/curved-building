@@ -12,3 +12,8 @@ export function tracePoints(points) {
 		ctx.lineTo(x, y);
 	}
 }
+
+export function arc(x, y, radius, start = 0, end = Math.PI * 2) {
+	const [px, py] = proj(x, y);
+	ctx.arc(px, py, proj(radius), start, end);
+}
