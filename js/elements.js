@@ -18,10 +18,12 @@ export function addPath(points, color) {
 
 export function addCircle(x, y, radius, color) {
 	elements.push({
-		type: TYPE_CIRCLE,
+		type: TYPE_ARC,
 		x,
 		y,
 		radius,
+		start: 0,
+		end: Math.PI * 2,
 		color,
 	});
 }
@@ -55,13 +57,14 @@ function drawCircle({ x, y, radius, color }) {
 function drawArc({ x, y, radius, start, end, color }) {
 	ctx.strokeStyle = color;
 	ctx.beginPath();
-	ctx.arc(x, y, radius, start, end);
+	arc(x, y, radius, start, end);
 	ctx.stroke();
 }
 
 const drawFnMap = {
 	[TYPE_PATH]: drawPath,
 	[TYPE_CIRCLE]: drawCircle,
+	[TYPE_ARC]: drawArc,
 };
 
 export function drawElements() {

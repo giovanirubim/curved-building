@@ -1,14 +1,9 @@
-import { canvas, ctx, tracePoints } from './canvas.js';
+import { canvas, ctx, drawScale, tracePoints } from './canvas.js';
 import { generateBuildingElements } from './building-elements.js';
 import { drawElements } from './elements.js';
 import { getValues } from './building-math.js';
 
-import {
-	applyOffset,
-	applyZoom,
-	centralize,
-	setViewport,
-} from './projection.js';
+import { applyOffset, applyZoom, centralize, setViewport } from './projection.js';
 
 const paths = [];
 
@@ -17,6 +12,7 @@ function render() {
 	ctx.fillStyle = '#246';
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	drawElements();
+	drawScale();
 }
 
 function adjustScreen() {
